@@ -1,0 +1,82 @@
+.contactContainer {
+  padding: 80px 0;
+  max-width: 700px;
+  margin: auto;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #111;
+  letter-spacing: 1px;
+ 
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  margin: 0.6rem auto 0;
+  border-radius: 2px;
+}
+
+
+
+
+/* title onlly */
+/* pageContact.module.css */
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 600;
+  text-align: center; /* center the heading */
+  font-family: "Playfair Display", serif; /* elegant serif font */
+  color: #222;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  position: relative;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+/* Golden glow accent behind text */
+.title::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 2px;
+  background: linear-gradient(90deg, #d4af37, #f5e79e, #d4af37);
+  border-radius: 2px;
+  opacity: 0;
+  animation: glowLine 1.5s ease forwards 0.5s;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Underline glow animation */
+@keyframes glowLine {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 140px;
+    opacity: 1;
+  }
+}

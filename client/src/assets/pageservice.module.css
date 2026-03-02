@@ -1,0 +1,70 @@
+.card {
+  position: relative;
+  background: var(--card-bg, #fff);
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* Background image layer */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--card-bg-image, url('/default-bg.jpg')) center/cover no-repeat;
+  opacity: 0.15; /* subtle overlay */
+  z-index: 0;
+}
+
+.header, .descriptionWrapper, .footer {
+  position: relative;
+  z-index: 1; /* keep content above bg */
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #007cf0, #00dfd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.description {
+  max-height: 4.5rem;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  color: #333;
+}
+
+.description.expanded {
+  max-height: 100vh; /* expand fully */
+}
+
+.toggleBtn {
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #00dfd8, #007cf0);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.toggleBtn:hover {
+  background: linear-gradient(90deg, #007cf0, #00dfd8);
+  transform: scale(1.05);
+}

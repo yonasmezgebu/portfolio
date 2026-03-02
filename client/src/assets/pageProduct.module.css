@@ -1,0 +1,109 @@
+.projects {
+  padding: 100px 0;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+/* Abstract glowing background */
+.projects::before,
+.projects::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(58, 122, 254, 0.12), transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.projects::before {
+  top: -120px;
+  left: -120px;
+}
+
+.projects::after {
+  bottom: -120px;
+  right: -120px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* title onnlly */
+
+
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  text-align: center; /* center the heading */
+  font-family: "Georgia", serif; /* elegant serif font */
+  letter-spacing: 1.5px;
+  position: relative;
+  margin-bottom: 2rem;
+  animation: fadeInScale 1.2s ease forwards;
+}
+
+/* Decorative golden underline */
+.title::after {
+  content: "";
+  display: block;
+  margin: 0.8rem auto 0 auto; /* center underline */
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #d4af37, #f5e79e, #d4af37);
+  border-radius: 2px;
+  animation: underlineExpand 1.5s ease forwards;
+}
+
+/* Fade + scale animation for text */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Smooth underline expansion */
+@keyframes underlineExpand {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 120px;
+    opacity: 1;
+  }
+}

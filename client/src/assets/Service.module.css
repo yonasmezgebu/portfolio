@@ -1,0 +1,57 @@
+.servicesSection {
+  position: relative;
+  padding: 4rem 2rem;
+  background: var(--section-bg, #f9f9f9);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Background image layer for future use */
+.servicesSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--section-bg-image, url('/default-services-bg.jpg')) center/cover no-repeat;
+  opacity: 0.1; /* subtle overlay */
+  z-index: 0;
+}
+
+.servicesHeader {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.skillHeading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #007cf0, #00dfd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subHeading {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.servicesGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.servicesFooter {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1rem;
+  color: #444;
+}

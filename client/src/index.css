@@ -1,0 +1,71 @@
+html {
+  scroll-behavior: smooth;
+}
+.app {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Pollen container covers whole viewport */
+.pollenContainer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* decorative only */
+  z-index: 0; /* behind content */
+  overflow: hidden;
+}
+
+/* Pollen particles */
+.pollen {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 200, 0.7); /* soft yellow pollen */
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 200, 0.9);
+  animation: floatPollen 18s linear infinite;
+  top: 100%; /* start at bottom */
+  left: calc(100% * var(--i, 0) / 30); /* distribute horizontally */
+}
+
+/* Randomize speeds/delays */
+.pollen:nth-child(3n) {
+  background: rgba(255, 255, 255, 0.6);
+  animation-duration: 22s;
+}
+.pollen:nth-child(5n) {
+  animation-duration: 26s;
+}
+.pollen:nth-child(7n) {
+  animation-delay: 5s;
+}
+.pollen:nth-child(11n) {
+  animation-delay: 10s;
+}
+
+/* Floating pollen animation */
+@keyframes floatPollen {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-80px) translateX(30px) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-160px) translateX(-20px) scale(0.9);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-240px) translateX(40px) scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-320px) translateX(-10px) scale(1);
+    opacity: 0;
+  }
+}

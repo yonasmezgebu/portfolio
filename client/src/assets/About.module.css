@@ -1,0 +1,104 @@
+.aboutSection {
+  padding: 4rem 2rem;
+  background: var(--about-bg, #f9f9f9);
+}
+
+.container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+/* Photo floats left */
+.imageWrapper {
+  flex: 1 1 300px;
+  float: left;
+}
+
+.photo {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+/* Text block */
+.textWrapper {
+  flex: 2 1 500px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: #00dfd8;
+  margin: 0.5rem auto 0 auto;
+  border-radius: 2px;
+}
+
+/* Description */
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+  max-height: none; /* show all by default */
+  overflow: visible;
+}
+
+/* Expanded state (used only on mobile) */
+.description.expanded {
+  max-height: 100vh;
+}
+
+/* Toggle button hidden by default */
+.toggleBtn {
+  display: none;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #007cf0, #00dfd8);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.toggleBtn:hover {
+  background: linear-gradient(90deg, #00dfd8, #007cf0);
+  transform: scale(1.05);
+}
+
+/* Mobile responsive: stack photo on top, text below, toggle visible */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .description {
+    max-height: 8rem; /* collapsed by default */
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .toggleBtn {
+    display: block;
+  }
+}
+

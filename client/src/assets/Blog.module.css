@@ -1,0 +1,159 @@
+/* Blog.module.css */
+
+/* Theme variables */
+:root {
+  --primary: #0077ff;
+  --secondary: #00c6ff;
+  --text-dark: #222;
+  --text-light: #555;
+  --bg-gradient: linear-gradient(135deg, #f9f9f9, #ffffff);
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Section */
+.blog {
+  padding: 6rem 2rem;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Title */
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  padding: 0 1rem;
+}
+
+/* Card wrapper for hover animation */
+.cardWrapper {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.cardWrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Decorative gradient overlay */
+.cardWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.cardWrapper:hover::before {
+  opacity: 0.08;
+}
+
+/* Inner BlogCard content */
+.cardWrapper > * {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.4rem;
+  }
+
+  .grid {
+    gap: 1.5rem;
+  }
+
+  .cardWrapper > * {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .cardWrapper > * h3 {
+    font-size: 1.3rem;
+  }
+
+  .cardWrapper > * p {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+/* title onlly */
+
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center; /* center the heading */
+  background: linear-gradient(90deg, #af9608, #05802a, #fbc2eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 4px;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: letterReveal 1.5s forwards ease-in-out;
+}
+
+/* Smooth fade + spacing animation */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    letter-spacing: 20px;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: 4px;
+    transform: translateY(0);
+  }
+}
