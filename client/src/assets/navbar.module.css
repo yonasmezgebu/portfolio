@@ -1,13 +1,31 @@
-/* Base navbar */
 .navbar {
-  position: fixed; /* always pinned at top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: #ffffff; /* solid background */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
   z-index: 1000;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+:global([data-theme="dark"]) .navbar {
+  background: rgba(15, 17, 21, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Scroll Progress Bar */
+.progressBar {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary, #00c6ff));
+  width: 0%;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px rgba(0, 119, 255, 0.3);
 }
 
 /* Inner container */
@@ -22,12 +40,30 @@
 
 /* Logo */
 .logo {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #000;
-  letter-spacing: 1px;
-  cursor: pointer;
+  border: 1px solid var(--text-color);
+  /* subtle rectangular border */
+  border-radius: 6px;
+  /* slight rounding */
+  background: var(--bg-color);
+  /* clean background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  /* soft shadow */
 }
+
+.logo img {
+  display: block;
+  width: 120px;
+  height: 25px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 90px;
+  }
+}
+
+
 
 /* Links */
 .links {
@@ -38,13 +74,13 @@
 .links a {
   text-decoration: none;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   position: relative;
   transition: color 0.3s ease;
 }
 
 .links a:hover {
-  color: #0077ff;
+  color: var(--primary-color);
 }
 
 .active {
@@ -74,7 +110,7 @@
 .hamburger span {
   width: 24px;
   height: 3px;
-  background: #000;
+  background: var(--text-color);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -85,7 +121,9 @@
     position: absolute;
     top: 64px;
     right: 0;
-    background: #ffffff; /* solid background */
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem 2rem;

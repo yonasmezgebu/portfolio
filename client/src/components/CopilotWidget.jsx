@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "../assets/CopilotWidget.module.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function CopilotWidget() {
   const [open, setOpen] = useState(false);
+  const { theme } = useTheme();
   const [messages, setMessages] = useState([
     { from: "copilot", text: "Hi! I'm your Copilot. Want to explore my portfolio?" }
   ]);
@@ -22,6 +24,11 @@ export default function CopilotWidget() {
     const savedSession = localStorage.getItem("copilotSessionId");
     if (savedSession) setSessionId(savedSession);
     checkBackendConnection();
+
+    // Listen for custom open event
+    const handleOpen = () => setOpen(true);
+    window.addEventListener("openCopilot", handleOpen);
+    return () => window.removeEventListener("openCopilot", handleOpen);
   }, []);
 
   const checkBackendConnection = async () => {
@@ -88,6 +95,7 @@ export default function CopilotWidget() {
 
   const startNewChat = async () => {
     setMessages([{ from: "copilot", text: "Hi! I'm your Copilot. Want to explore my portfolio?" }]);
+    setInput(""); // Also clear input
     if (sessionId) {
       try {
         await fetch(`${API_URL}/conversation/${sessionId}`, { method: "DELETE" });
@@ -100,24 +108,68 @@ export default function CopilotWidget() {
   };
 
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} data-theme={theme}>
       {!open && (
-        <button className={styles.floatingBtn} onClick={() => setOpen(true)}>
+        <button className={styles.floatingBtn} onClick={() => setOpen(true)} title="Open Copilot">
           <span className={styles.emoji}>🤖</span>
         </button>
       )}
 
       {open && (
-        <div className={styles.chatWindow}>
+        <div className={`${styles.chatWindow} ${messages.length === 1 ? styles.chatBlank : ""}`}>
+          {/* SIMPLE X CLOSE BUTTON - ADDED HERE */}
+          <button 
+            onClick={() => setOpen(false)} 
+            className={styles.closeXBtn}
+            title="Close Chat"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <button 
+            onClick={async () => {
+              await startNewChat();
+              setOpen(false);
+            }} 
+            className={`${styles.topCloseBtn} ${styles.chatIcon}`} 
+            title="Close and Wipe Conversation"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
           <div className={styles.header}>
-            <span>Copilot</span>
+            <div className={styles.headerTitle}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 8v4"></path>
+                <path d="M12 16h.01"></path>
+              </svg>
+              <span>Copilot AI</span>
+            </div>
             <div className={styles.headerButtons}>
-              <button onClick={startNewChat} className={styles.newChatBtn} title="Start new chat">✕</button>
-              <button onClick={() => setOpen(false)} className={styles.closeBtn}>✕</button>
+              <button onClick={startNewChat} className={styles.newChatBtn} title="Clear Chat history">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
             </div>
           </div>
 
           <div className={styles.chatBox}>
+            <div className={`${styles.blob} ${styles.blob1}`}></div>
+            <div className={`${styles.blob} ${styles.blob2}`}></div>
+            {messages.length > 3 && (
+              <button className={styles.clearAllBtn} onClick={startNewChat}>
+                Clear Conversation
+              </button>
+            )}
             {connectionStatus === "checking" && (
               <div style={{ textAlign: "center", padding: "10px", color: "#666" }}>
                 Checking connection to chat server...
@@ -155,19 +207,37 @@ export default function CopilotWidget() {
           </div>
 
           <div className={styles.inputArea}>
-            <input
-              type="text"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={connectionStatus === "connected" ? "Ask Copilot..." : "Waiting for connection..."}
-              disabled={loading || connectionStatus !== "connected"}
-            />
+            <div className={styles.inputWrapper}>
+              <input
+                type="text"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder={connectionStatus === "connected" ? "Ask Copilot..." : "Waiting for connection..."}
+                disabled={loading || connectionStatus !== "connected"}
+              />
+              {input && (
+                <button 
+                  className={styles.clearInputBtn} 
+                  onClick={() => setInput("")}
+                  title="Clear text"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              )}
+            </div>
             <button
+              className={styles.sendBtn}
               onClick={handleSend}
               disabled={loading || !input.trim() || connectionStatus !== "connected"}
             >
-              Send
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
             </button>
           </div>
 

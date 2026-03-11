@@ -19,24 +19,34 @@ export default function Hero() {
             I'm A <span className={styles.accent}>Developer!</span>
           </span>
         </h1>
-        
-       <p 
-  className={styles.subtitle} 
-  style={{ color: "green", fontSize: "1.2rem", marginTop: "20px" }}
->
 
- Full-stack engineer • Problem Solver • Future Dreamer and billionaire. 
- 
-</p>
+        <h1
+          // className={styles.subtitle}
+          style={{ color: "green", marginTop: "20px" }}
+        >
 
-       <a className={styles.button}
-  href="https://github.com/yonasmezgebu" 
-  style={{ textDecoration: "none" }}
->
-  View My Work
-</a>
+          Full-stack engineer • Problem Solver • Future Dreamer and billionaire.
 
-        
+        </h1>
+
+        <div className={styles.ctaGroup}>
+          <a className={styles.button}
+            href="https://github.com/yonasmezgebu"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            View My Work
+          </a>
+          <button 
+            className={styles.aiButton}
+            onClick={() => window.dispatchEvent(new CustomEvent("openCopilot"))}
+          >
+            Open AI
+          </button>
+        </div>
+
+
       </div>
     </section>
   );

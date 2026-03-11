@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../assets/Contact.module.css";
+import SendIcon from '@mui/icons-material/Send';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -51,8 +52,9 @@ export default function ContactForm() {
         />
       </div>
 
-      <button className={styles.button} type="submit">
+      <button className={styles.button} type="submit" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
         Send Message
+        <SendIcon sx={{ fontSize: '1.2rem' }} />
       </button>
     </form>
   );

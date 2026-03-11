@@ -9,17 +9,19 @@ import Contact from "./pages/pagesContact";
 
 import CopilotWidget from "./components/CopilotWidget";
 
+import AnimatedSection from "./components/AnimatedSection";
+
 export default function App() {
   return (
     <div className="app">
       <Navbar />
       <main className="main">
-        <section id="home"><Home /></section>
-        <section id="about"><About /></section>
-        <section id="projects"><Projects /></section>
-        <section id="services"><Services /></section>
-        <section id="blog"><Blog /></section>
-        <section id="contact"><Contact /></section>
+        <AnimatedSection id="home"><Home /></AnimatedSection>
+        <AnimatedSection id="about"><About /></AnimatedSection>
+        <AnimatedSection id="projects"><Projects /></AnimatedSection>
+        <AnimatedSection id="services"><Services /></AnimatedSection>
+        <AnimatedSection id="blog"><Blog /></AnimatedSection>
+        <AnimatedSection id="contact"><Contact /></AnimatedSection>
       </main>
       <Footer />
       <CopilotWidget />

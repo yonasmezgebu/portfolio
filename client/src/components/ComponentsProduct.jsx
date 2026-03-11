@@ -10,8 +10,7 @@ export default function ProjectCard({ project }) {
       <div className={styles.actions}>
         {project.demo && (
           <a href={project.demo} target="_blank" rel="noreferrer" className={styles.link}>
-            Live Demo
-          </a>
+            </a>
         )}
         {project.github && (
           <a href={project.github} target="_blank" rel="noreferrer" className={styles.link}>

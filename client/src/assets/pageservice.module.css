@@ -1,15 +1,18 @@
 .card {
   position: relative;
-  background: var(--card-bg, #fff);
+  background: var(--card-bg);
   border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
   padding: 1.5rem;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
+  border-color: #00dfd8;
+  box-shadow: 0 8px 24px rgba(0, 223, 216, 0.18), var(--card-shadow);
 }
 
 /* Background image layer */
@@ -18,13 +21,17 @@
   position: absolute;
   inset: 0;
   background: var(--card-bg-image, url('/default-bg.jpg')) center/cover no-repeat;
-  opacity: 0.15; /* subtle overlay */
+  opacity: 0.15;
+  /* subtle overlay */
   z-index: 0;
 }
 
-.header, .descriptionWrapper, .footer {
+.header,
+.descriptionWrapper,
+.footer {
   position: relative;
-  z-index: 1; /* keep content above bg */
+  z-index: 1;
+  /* keep content above bg */
 }
 
 .title {
@@ -32,12 +39,14 @@
   font-weight: 700;
   background: linear-gradient(90deg, #007cf0, #00dfd8);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .tagline {
   font-size: 1rem;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
   margin-top: 0.25rem;
 }
 
@@ -45,11 +54,13 @@
   max-height: 4.5rem;
   overflow: hidden;
   transition: max-height 0.4s ease;
-  color: #333;
+  color: var(--text-color);
+  opacity: 0.9;
 }
 
 .description.expanded {
-  max-height: 100vh; /* expand fully */
+  max-height: 100vh;
+  /* expand fully */
 }
 
 .toggleBtn {

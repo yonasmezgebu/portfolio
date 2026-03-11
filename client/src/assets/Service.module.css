@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: background 0.3s ease;
+}
+
+:global([data-theme="dark"]) .servicesSection {
+  background: transparent;
 }
 
 /* Background image layer for future use */
@@ -14,7 +19,8 @@
   position: absolute;
   inset: 0;
   background: var(--section-bg-image, url('/default-services-bg.jpg')) center/cover no-repeat;
-  opacity: 0.1; /* subtle overlay */
+  opacity: 0.1;
+  /* subtle overlay */
   z-index: 0;
 }
 
@@ -30,6 +36,7 @@
   font-weight: 800;
   background: linear-gradient(90deg, #007cf0, #00dfd8);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

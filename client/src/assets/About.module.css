@@ -1,104 +1,192 @@
+/* Section wrapper */
 .aboutSection {
-  padding: 4rem 2rem;
-  background: var(--about-bg, #f9f9f9);
-}
-
-.container {
+  width: 100%;
+  padding: 40px 20px;
+  margin-top: 60px;
   display: flex;
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
+  justify-content: center;
   align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
-/* Photo floats left */
+/* Image block */
 .imageWrapper {
-  flex: 1 1 300px;
-  float: left;
+  flex: 0 1 350px;
+  min-width: 280px;
+  max-width: 400px;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: none;
+  /* No border by default */
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+  display: flex;
+  padding-bottom: 150px;
+}
+
+.imageWrapper:hover {
+  transform: translateY(-8px) scale(1.02);
+  border: 2px solid rgba(0, 223, 216, 0.3);
+  /* Light border on hover */
+  box-shadow:
+    0 0 12px rgba(0, 223, 216, 0.2),
+    0 8px 32px rgba(0, 119, 240, 0.1);
 }
 
 .photo {
   width: 100%;
-  max-width: 350px;
-  height: auto;
+  height: 859px;
   object-fit: cover;
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  /* Match parent border-radius */
+  transition: transform 0.5s ease, filter 0.4s ease;
+  display: block;
+}
+
+/* Zoom out effect on hover */
+.imageWrapper:hover .photo {
+  transform: scale(0.95);
+  /* Zoom out slightly */
+  filter: brightness(1.05) contrast(1.05);
 }
 
 /* Text block */
 .textWrapper {
-  flex: 2 1 500px;
+  flex: 1 1 500px;
+  min-width: 300px;
+  max-width: 700px;
+  padding: 30px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.textWrapper:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 124, 240, 0.3);
+  /* Light blue border on hover */
+  box-shadow:
+    0 0 12px rgba(0, 124, 240, 0.2),
+    0 8px 32px rgba(0, 124, 240, 0.1);
 }
 
 .title {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  font-weight: bold;
   text-align: center;
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
+  display: inline-block;
   position: relative;
+  padding-bottom: 8px;
 }
 
 .title::after {
   content: "";
   display: block;
   width: 60%;
-  height: 3px;
-  background: #00dfd8;
-  margin: 0.5rem auto 0 auto;
+  margin: 0 auto;
+  border-bottom: 3px solid #c0a060;
   border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(192, 160, 96, 0.4);
 }
 
-/* Description */
 .description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
-  color: #333;
-  text-align: justify;
-  max-height: none; /* show all by default */
-  overflow: visible;
+  color: var(--text-color);
+  max-height: none;
+  transition: max-height 0.4s ease, opacity 0.4s ease, color 0.3s ease;
 }
 
-/* Expanded state (used only on mobile) */
-.description.expanded {
-  max-height: 100vh;
+.expanded {
+  max-height: none;
+  opacity: 1;
 }
 
-/* Toggle button hidden by default */
 .toggleBtn {
   display: none;
-  margin-top: 1rem;
-  background: linear-gradient(90deg, #007cf0, #00dfd8);
+  margin-top: 15px;
+  background: #0077cc;
   color: #fff;
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.6rem 1.2rem;
+  padding: 10px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
 }
 
 .toggleBtn:hover {
-  background: linear-gradient(90deg, #00dfd8, #007cf0);
-  transform: scale(1.05);
+  background: #005fa3;
 }
 
-/* Mobile responsive: stack photo on top, text below, toggle visible */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .container {
+  .aboutSection {
     flex-direction: column;
     align-items: center;
+    gap: 20px;
+    padding: 20px 10px;
+  }
+
+  .imageWrapper {
+    flex: 0 0 auto;
+    width: 80%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .textWrapper {
+    flex: 0 0 auto;
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
   }
 
   .description {
-    max-height: 8rem; /* collapsed by default */
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-height: 150px;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+  }
+
+  .description.expanded {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
   }
 
   .toggleBtn {
-    display: block;
+    display: inline-block;
   }
 }
 
+@media (max-width: 480px) {
+  .imageWrapper {
+    width: 85%;
+  }
+
+  .textWrapper {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    max-height: 130px;
+  }
+}
